@@ -1,0 +1,34 @@
+<div ng-show="user" id="userDetails">
+  <div>
+    Name: {{user.name}}
+  </div>
+  <div>
+    Location: {{user.location}}
+    <img src="{{user.avatar_url}}" alt="" />
+
+    <span>order:</span>
+    <select ng-model="repoSortOrder">
+      <option value="+name">Name</option>
+      <option value="-stargazers_count">stars</option>
+      <option value="+language">languages</option>
+    </select>
+  </div>
+
+  <table ng-hide="!user">
+    <thead>
+      <tr>
+        <td>name</td>
+        <td>stars</td>
+        <td>languages</td>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr ng-repeat="repo in repos | orderBy:'-stargazers_count'"> -->
+      <tr ng-repeat="repo in repos | orderBy:repoSortOrder">
+        <td>{{repo.name}}</td>
+        <td>{{repo.stargazers_count | number }}</td>
+        <td>{{repo.language}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
